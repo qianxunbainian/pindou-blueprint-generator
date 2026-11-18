@@ -86,22 +86,22 @@ textarea{resize:vertical;min-height:52px}
 .stage{background:radial-gradient(rgba(0,0,0,.28) 1.2px,transparent 1.3px) 0 0/18px 18px,var(--stage);border-radius:26px;padding:20px;color:#efe9da;box-shadow:0 30px 70px rgba(35,26,12,.38),inset 0 1px 0 rgba(255,255,255,.07);min-width:0}
 .stageHead{display:flex;align-items:flex-end;gap:14px;flex-wrap:wrap;margin-bottom:14px}
 .stageHead .tt{min-width:200px;flex:1}
-.stageHead label{font-size:11.5px;letter-spacing:.16em;color:#a99e86;display:block;margin-bottom:5px}
+.stageHead label{font-size:11.5px;letter-spacing:.16em;color:#cdc2a6;display:block;margin-bottom:5px}
 .stageHead input[type=text]{background:transparent;border:0;border-bottom:1.5px solid #57503f;border-radius:0;color:#fff;font-family:"Songti SC","STSong",serif;font-size:21px;padding:2px 2px 6px;letter-spacing:.03em}
 .stageHead input[type=text]::placeholder{color:#7d7460}
 .stageHead input[type=text]:focus{outline:none;border-bottom-color:var(--accent)}
 .dchips{display:flex;gap:8px;flex-wrap:wrap}
 .dchip{background:var(--stage2);border:1px solid #4c4638;border-radius:12px;padding:7px 12px;text-align:center;min-width:70px}
-.dchip small{display:block;font-size:11px;color:#a99e86;letter-spacing:.08em}
+.dchip small{display:block;font-size:11px;color:#cdc2a6;letter-spacing:.08em}
 .dchip b{font-size:16.5px;font-variant-numeric:tabular-nums;color:#fff;white-space:nowrap}
-.dchip b em{font-style:normal;font-size:11.5px;color:#a99e86;margin-left:2px}
+.dchip b em{font-style:normal;font-size:11.5px;color:#cdc2a6;margin-left:2px}
 .stage .toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
 .stage .seg{background:#211e19}
-.stage .seg button{color:#a99e86}
+.stage .seg button{color:#d8cfb6}
 .stage .seg button.on{background:#efe9da;color:var(--ink);box-shadow:none}
 .stage .grow{flex:1}
 .zoomctl{display:flex;align-items:center;gap:2px;background:#211e19;border-radius:11px;padding:3px}
-.zoomctl button{border:0;background:transparent;width:32px;height:32px;font-size:16px;border-radius:8px;cursor:pointer;color:#a99e86}
+.zoomctl button{border:0;background:transparent;width:32px;height:32px;font-size:16px;border-radius:8px;cursor:pointer;color:#cdc2a6}
 .zoomctl button:hover{background:#35312a;color:#fff}
 .zoomctl input[type=range]{width:84px;accent-color:var(--accent)}
 .boardFrame{background:#fdfcf9;border-radius:16px;padding:10px;box-shadow:0 18px 44px rgba(0,0,0,.42)}
@@ -112,7 +112,7 @@ canvas#board{width:100%;height:auto;display:block;border-radius:8px;background:#
 #emptyState .small{color:var(--muted);font-size:13px;line-height:1.7;max-width:350px}
 #emptyState .row{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
 #emptyState .btn{width:auto;padding:10px 22px}
-.stage .statusbar{display:flex;gap:8px 14px;flex-wrap:wrap;font-size:12.5px;color:#a99e86;border-top:1px solid #4c4638;margin-top:14px;padding-top:11px;font-variant-numeric:tabular-nums}
+.stage .statusbar{display:flex;gap:8px 14px;flex-wrap:wrap;font-size:12.5px;color:#cdc2a6;border-top:1px solid #4c4638;margin-top:14px;padding-top:11px;font-variant-numeric:tabular-nums}
 .stage .statusbar b{color:#fff}
 #paintbar{display:none;margin-bottom:12px;background:#35312a;border:1px solid #4c4638;border-radius:14px;padding:12px}
 #paintbar.open{display:block}
@@ -275,6 +275,14 @@ footer{max-width:1320px;margin:0 auto 40px;padding:0 22px;color:var(--muted);fon
       <div style="height:8px"></div>
       <button class="btn ghost" id="printBtn">打印图纸</button>
     </section>
+    <div style="border-top:1px dashed #ddd0b8;padding:14px 17px 16px">
+      <div style="font-size:12px;letter-spacing:.14em;color:#8a8175;margin-bottom:8px">下一步</div>
+      <div style="font-size:13px;line-height:2;color:#4c4638">
+        1. 照清单买豆（点颜色可在图纸上高亮定位）<br>
+        2. 切到「拼制」模式，摆好一颗勾一颗<br>
+        3. 在「导出」里下载图纸打印，熨烫记得镜像
+      </div>
+    </div>
   </div></aside>
 </main>
 <footer>
