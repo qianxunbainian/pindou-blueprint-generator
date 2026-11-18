@@ -1609,3 +1609,105 @@
     :root[data-theme="dark"] .product-links a {
       background: #22201d;
     }
+
+    /* ============================================================
+       v5.1 打磨层 (POLISH) — 细节规则来自 X 上 UI 博主的公开帖子合集：
+       · Vamshi 的按钮/视觉速查表（每屏一个主按钮、44–48px 点击区、
+         正文行高 1.4–1.6、对比度 ≥4.5:1、8pt 间距体系）
+       · Adham Dannaway《16 个逻辑型 UI 细节》（别只靠颜色表达状态、
+         去掉无意义样式、用间距分组）
+       · Refactoring UI（Steve Schoger）的经典做法：按钮要有
+         顶部高光 + 分层柔和阴影，按下时回落，界面才有"做工感"。
+       本层只覆盖视觉与微交互，不改任何布局与功能。
+       ============================================================ */
+
+    ::selection { background: var(--accent-soft); color: var(--accent-strong); }
+
+    /* 主按钮：分层阴影 + 顶部高光 + 悬停上浮 + 按压回落 */
+    .button.primary {
+      background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 88%, white) 0%, var(--accent) 55%, var(--accent-strong) 130%);
+      border-color: color-mix(in srgb, var(--accent-strong) 70%, black);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .28), inset 0 -1px 0 rgba(0, 0, 0, .12),
+        0 1px 2px rgba(64, 32, 18, .25), 0 4px 10px rgba(135, 53, 28, .18);
+      text-shadow: 0 1px 1px rgba(0, 0, 0, .12);
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .button.primary:hover:not(:disabled) {
+        background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 80%, white) 0%, var(--accent) 60%, var(--accent-strong) 125%);
+        transform: translateY(-1px);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, .3), inset 0 -1px 0 rgba(0, 0, 0, .12),
+          0 2px 3px rgba(64, 32, 18, .22), 0 8px 18px rgba(135, 53, 28, .22);
+      }
+      /* 次按钮悬停：给一点浮起和柔影，而不是只有变色 */
+      .button:hover:not(:disabled), .icon-button:hover:not(:disabled),
+      .tool-button:hover:not(:disabled), .preset-button:hover:not(:disabled),
+      .segment-button:hover:not(:disabled), .toggle-button:hover:not(:disabled) {
+        box-shadow: 0 1px 2px rgba(46, 40, 33, .07), 0 4px 10px rgba(46, 40, 33, .07);
+      }
+    }
+    .button.primary:active:not(:disabled) {
+      transform: translateY(1px);
+      transition-duration: 60ms;
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, .22), 0 1px 1px rgba(64, 32, 18, .18);
+    }
+
+    /* 选中态不只靠颜色：加内陷阴影，一眼看出"已按下"（Dannaway：别只靠颜色） */
+    .tool-button[aria-pressed="true"], .preset-button[aria-pressed="true"],
+    .size-mode-button[aria-pressed="true"], .board-layout-button[aria-pressed="true"],
+    .segment-button[aria-pressed="true"], .toggle-button[aria-pressed="true"] {
+      box-shadow: inset 0 1px 3px rgba(135, 53, 28, .18), inset 0 0 0 1px rgba(135, 53, 28, .12);
+    }
+    .palette-color[aria-pressed="true"] {
+      box-shadow: inset 0 0 0 2px var(--accent), 0 2px 6px rgba(135, 53, 28, .2);
+    }
+
+    /* 色块悬停：轻微放大 + 光环，找色更快 */
+    .palette-color { transition: transform 120ms ease, box-shadow 150ms ease, background-color 150ms ease; }
+    @media (hover: hover) and (pointer: fine) {
+      .palette-color:hover { transform: translateY(-1px) scale(1.03); box-shadow: 0 3px 8px rgba(46, 40, 33, .14); z-index: 1; }
+    }
+
+    /* 输入框：悬停边框加深，聚焦时柔光环（代替生硬描边） */
+    input[type="text"], input[type="number"], input[type="search"], select, textarea {
+      transition: border-color 150ms ease, box-shadow 150ms ease, background-color 150ms ease;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      input[type="text"]:hover, input[type="number"]:hover, input[type="search"]:hover, select:hover, textarea:hover {
+        border-color: var(--line-strong);
+      }
+    }
+    input[type="text"]:focus, input[type="number"]:focus, input[type="search"]:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--focus);
+      box-shadow: 0 0 0 4px color-mix(in srgb, var(--focus) 18%, transparent);
+    }
+
+    /* 滑杆：圆形把手 + 柔影，悬停放大、按住收紧 */
+    input[type="range"] { -webkit-appearance: none; appearance: none; background: transparent; cursor: pointer; }
+    input[type="range"]::-webkit-slider-runnable-track { height: 4px; border-radius: 999px; background: color-mix(in srgb, var(--accent) 30%, var(--line)); }
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none; appearance: none;
+      width: 18px; height: 18px; margin-top: -7px; border-radius: 50%;
+      background: white; border: 1px solid var(--line-strong);
+      box-shadow: 0 1px 3px rgba(46, 40, 33, .25), inset 0 1px 0 rgba(255, 255, 255, .9);
+      transition: transform 120ms ease, box-shadow 150ms ease;
+    }
+    input[type="range"]::-moz-range-track { height: 4px; border-radius: 999px; background: color-mix(in srgb, var(--accent) 30%, var(--line)); }
+    input[type="range"]::-moz-range-thumb {
+      width: 18px; height: 18px; border-radius: 50%;
+      background: white; border: 1px solid var(--line-strong);
+      box-shadow: 0 1px 3px rgba(46, 40, 33, .25);
+      transition: transform 120ms ease, box-shadow 150ms ease;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      input[type="range"]:hover::-webkit-slider-thumb { transform: scale(1.15); }
+      input[type="range"]:hover::-moz-range-thumb { transform: scale(1.15); }
+    }
+    input[type="range"]:active::-webkit-slider-thumb { transform: scale(1.05); box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent) 16%, transparent), 0 1px 3px rgba(46, 40, 33, .25); }
+    input[type="range"]:active::-moz-range-thumb { transform: scale(1.05); box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent) 16%, transparent), 0 1px 3px rgba(46, 40, 33, .25); }
+
+    /* 复选框统一品牌色，点选区更明确 */
+    input[type="checkbox"] { accent-color: var(--accent); width: 16px; height: 16px; cursor: pointer; }
+
+    /* 提示条入场：淡入 + 微微放大落定，不再硬蹦出来 */
+    .toast { box-shadow: 0 10px 30px rgba(36, 34, 31, .25), 0 2px 6px rgba(36, 34, 31, .18); }
