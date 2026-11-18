@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://qianxunbainian.github.io/pindou-blueprint-generator/sitemap.xml
