@@ -1711,3 +1711,24 @@
 
     /* 提示条入场：淡入 + 微微放大落定，不再硬蹦出来 */
     .toast { box-shadow: 0 10px 30px rgba(36, 34, 31, .25), 0 2px 6px rgba(36, 34, 31, .18); }
+
+    /* ============================================================
+       v5.2 — 来自 @steveschoger 在 X 上的仪表盘设计视频（2026-04-10 帖，
+       未登录可播，实际收听前 17.5 分钟提取）：
+       · 顶栏不要自成一色，要和页面同色"坐"在背景上，只留一条细分隔线
+       · 搜索框去掉容器感：无边框、透明底，只剩图标和占位文字，
+         聚焦时才轻轻浮现底色（保留可发现性的一点妥协）
+       · 分隔线全站保持同一对比度，不忽深忽浅
+       ============================================================ */
+    .topbar { background: var(--page); }
+    #paletteSearch {
+      border-color: transparent;
+      background: transparent;
+      box-shadow: none;
+    }
+    #paletteSearch:hover { border-color: transparent; background: color-mix(in srgb, var(--panel-strong) 55%, transparent); }
+    #paletteSearch:focus {
+      border-color: transparent;
+      background: var(--panel-strong);
+      box-shadow: 0 0 0 4px color-mix(in srgb, var(--focus) 16%, transparent);
+    }
