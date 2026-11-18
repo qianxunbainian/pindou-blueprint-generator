@@ -5,54 +5,56 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>拼豆图纸工坊 — 照片转 MARD 拼豆图纸（真实色号）</title>
 <style>
-:root{--paper:#f6f1e8;--panel:#fffdf8;--ink:#26221d;--muted:#8a8175;--line:#e6dccb;--accent:#cf3527;--accent-soft:#fbeae8;--radius:18px;--tap:40px}
+:root{--paper:#efe8da;--panel:#fffdf8;--ink:#26221d;--inkbar:#211d17;--muted:#8a8175;--line:#e6dccb;--accent:#cf3527;--accent-soft:#fbeae8;--brass:#b98a2f;--stage:#2c2822;--stage2:#35312a;--radius:18px}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--paper);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;-webkit-font-smoothing:antialiased}
-body::before{content:"";position:fixed;inset:0;background-image:radial-gradient(#ddd2bd 1px,transparent 1px);background-size:22px 22px;opacity:.35;pointer-events:none;z-index:0}
+body{margin:0;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;-webkit-font-smoothing:antialiased;background:linear-gradient(180deg,#f4efe3 0,#efe8da 340px,#e9e1cf 100%)}
 button,input,select,textarea{font-family:inherit}
 :focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
-/* ---------- 页眉 ---------- */
-header.top{position:relative;z-index:1;display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:18px 22px 4px;max-width:1280px;margin:0 auto}
+/* ---------- 顶栏（深色） ---------- */
+.topbar{background:var(--inkbar);color:#f3ecdd;box-shadow:0 10px 30px rgba(33,29,23,.35);position:relative;z-index:5}
+.topbar-in{max-width:1320px;margin:0 auto;padding:16px 22px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
 .logo{display:grid;grid-template-columns:repeat(3,9px);gap:3px;flex:none}
 .logo i{width:9px;height:9px;border-radius:50%}
-.brand h1{font-family:"Songti SC","STSong",serif;font-size:25px;margin:0;letter-spacing:.06em;white-space:nowrap}
-.brand p{margin:2px 0 0;color:var(--muted);font-size:13px}
-.top .spacer{flex:1}
-.badge{font-size:12px;color:#6d6353;border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:6px 12px;white-space:nowrap}
-.badge b{color:var(--accent)}
-a.gh{font-size:13px;color:var(--ink);text-decoration:none;border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:6px 14px;white-space:nowrap}
-.steps{position:relative;z-index:1;display:flex;gap:8px;max-width:1280px;margin:10px auto 0;padding:2px 22px;overflow-x:auto;scrollbar-width:none}
+.brand h1{font-family:"Songti SC","STSong",serif;font-size:24px;margin:0;letter-spacing:.08em;white-space:nowrap;font-weight:600}
+.brand p{margin:2px 0 0;color:#b7ab93;font-size:12.5px;letter-spacing:.04em}
+.topbar .spacer{flex:1}
+.badge{font-size:12px;color:#d8cdb4;border:1px solid #4a4436;border-radius:999px;padding:6px 12px;white-space:nowrap}
+.badge b{color:#ff8f84}
+a.gh{font-size:13px;color:#f3ecdd;text-decoration:none;border:1px solid #4a4436;border-radius:999px;padding:6px 14px;white-space:nowrap}
+a.gh:hover{border-color:#8a8175}
+.subbar{max-width:1320px;margin:0 auto;padding:12px 22px 2px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.steps{display:flex;gap:0;align-items:center;overflow-x:auto;scrollbar-width:none}
 .steps::-webkit-scrollbar{display:none}
-.steps span{font-size:12.5px;color:#6d6353;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:5px 12px;white-space:nowrap;flex:none}
-.steps span b{color:var(--accent);font-family:Georgia,serif;margin-right:4px}
+.steps span{font-size:12.5px;color:#6d6353;white-space:nowrap;display:flex;align-items:center;gap:7px}
+.steps span b{width:20px;height:20px;border-radius:50%;background:var(--ink);color:#fff;font-family:Georgia,serif;font-size:11.5px;display:inline-flex;align-items:center;justify-content:center;flex:none}
+.steps span.on b{background:var(--accent)}
+.steps i.sep{width:26px;height:1px;background:#c9bb9d;margin:0 10px;flex:none}
+.subbar .note{margin-left:auto;font-size:12.5px;color:var(--muted)}
 /* ---------- 主布局 ---------- */
-main{position:relative;z-index:1;max-width:1280px;margin:14px auto 50px;padding:0 22px;display:grid;grid-template-columns:300px minmax(0,1fr) 308px;gap:16px;align-items:start}
-.colL>.panel+.panel,.colR>.panel+.panel{margin-top:16px}
-@media(min-width:1700px){header.top,.steps,main,footer{max-width:1500px}main{grid-template-columns:324px minmax(0,1fr) 332px}}
-@media(min-width:1101px){.stage{position:sticky;top:12px}}
-@media(max-width:1100px){
-  main{grid-template-columns:268px minmax(0,1fr)}
-  .colR{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:start}
-  .colR>.panel+.panel{margin-top:0}
-}
-@media(max-width:880px){.colR{grid-template-columns:1fr 1fr}#panelExport{grid-column:1/-1}}
+main{max-width:1320px;margin:14px auto 46px;padding:0 22px;display:grid;grid-template-columns:296px minmax(0,1fr) 304px;gap:18px;align-items:start;position:relative;z-index:1}
+@media(min-width:1720px){.topbar-in,.subbar,main,footer{max-width:1560px}main{grid-template-columns:320px minmax(0,1fr) 330px}}
+@media(min-width:1101px){.stage{position:sticky;top:14px}}
+@media(max-width:1100px){main{grid-template-columns:264px minmax(0,1fr)}.colR{grid-column:1/-1}}
 @media(max-width:720px){
-  header.top{padding:14px 14px 2px}.brand h1{font-size:21px}.brand p{font-size:12px}
-  .badge{display:none}.steps{padding:2px 14px}
-  main{display:flex;flex-direction:column;padding:0 14px;gap:14px;margin-top:10px}
+  .topbar-in{padding:13px 14px}.brand h1{font-size:20px}.badge{display:none}
+  .subbar{padding:10px 14px 0}.subbar .note{display:none}
+  main{display:flex;flex-direction:column;padding:0 12px;gap:14px;margin-top:10px}
   .colL,.colR{display:contents}
-  .colL>.panel+.panel,.colR>.panel+.panel{margin-top:0}
-  #panelImg{order:1}.stage{order:2}#panelSpec{order:3}#panelAdj{order:4}#panelData{order:5}#panelMats{order:6}#panelExport{order:7}
-  .panel{padding:15px}
+  #panelImg{order:1}.stage{order:2}#panelSpec{order:3}#panelAdj{order:4}.colRcard{order:5}
+  .sec{padding:16px!important}
 }
-/* ---------- 面板与控件 ---------- */
-.panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:0 6px 24px rgba(90,70,30,.05);min-width:0}
-.panel h2{font-family:"Songti SC","STSong",serif;font-size:16px;margin:0 0 4px;letter-spacing:.05em}
-.panel .hint{font-size:12.5px;color:var(--muted);line-height:1.6;margin:0 0 12px}
-#drop{border:1.5px dashed #cdbfa5;border-radius:14px;padding:22px 12px;text-align:center;cursor:pointer;transition:border-color .15s,background .15s;background:#fbf7ee}
-#drop:hover,#drop:focus-visible{border-color:var(--accent);background:var(--accent-soft)}
+/* ---------- 左侧：单张检查卡，分区 ---------- */
+.inspector{background:var(--panel);border:1px solid var(--line);border-radius:22px;box-shadow:0 14px 34px rgba(90,70,30,.09);overflow:hidden}
+.sec{padding:19px 19px 15px}
+.sec+.sec{border-top:1px dashed #ddd0b8}
+.sec h2{font-size:13px;margin:0 0 3px;letter-spacing:.14em;display:flex;align-items:center;gap:8px;color:var(--ink)}
+.sec h2 em{font-style:normal;width:19px;height:19px;border-radius:50%;background:var(--accent-soft);color:var(--accent);font-family:Georgia,serif;font-size:11.5px;display:inline-flex;align-items:center;justify-content:center}
+.sec .hint{font-size:12.5px;color:var(--muted);line-height:1.6;margin:0 0 12px}
+@media(max-width:720px){.inspector{display:contents}.sec{background:var(--panel);border:1px solid var(--line);border-radius:20px;box-shadow:0 10px 26px rgba(90,70,30,.08)}.sec+.sec{border-top:1px solid var(--line)}}
+#drop{border:1.5px dashed #cdbfa5;border-radius:14px;padding:20px 12px;text-align:center;cursor:pointer;transition:.15s;background:#fbf7ee}
+#drop:hover{border-color:var(--accent);background:var(--accent-soft)}
 #drop .t{font-weight:600;font-size:15px;margin-top:8px}
 #drop .s{font-size:12px;color:var(--muted);margin-top:4px;line-height:1.6}
 .ctl{margin:13px 0}
@@ -71,49 +73,73 @@ textarea{resize:vertical;min-height:52px}
 .switch{display:flex;align-items:center;gap:8px;font-size:13.5px;margin:10px 0;cursor:pointer;min-height:28px}
 .switch input{accent-color:var(--accent);width:16px;height:16px;flex:none}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;background:var(--accent);color:#fff;border:0;border-radius:999px;padding:11px 20px;font-size:14.5px;font-weight:600;cursor:pointer;width:100%;min-height:44px;transition:filter .12s}
-.btn:hover{filter:brightness(1.06)}.btn.dark{background:var(--ink)}.btn.ghost{background:#fff;color:var(--ink);border:1px solid var(--line);font-weight:500}
-.btn:disabled{opacity:.4;cursor:default}
+.btn:hover{filter:brightness(1.07)}
+.btn.dark{background:var(--ink)}.btn.ghost{background:#fff;color:var(--ink);border:1px solid var(--line);font-weight:500}
 .btnrow{display:flex;gap:8px}.btnrow .btn{width:auto;flex:1;padding:10px 8px;font-size:13.5px}
 @media(pointer:coarse){.chip,.seg button{min-height:42px}input[type=range]{height:32px}.mat{padding:11px 8px}}
-/* 取景预览 */
 #prevBox{position:relative;border-radius:12px;overflow:hidden;border:1px solid var(--line);background:#eee9db;max-height:190px;margin-top:12px;touch-action:none;cursor:grab}
 #prevBox:active{cursor:grabbing}
 #prevImg{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;transform-origin:center}
 #prevBox .grid3{position:absolute;inset:0;background:linear-gradient(to right,transparent calc(33.3% - 1px),rgba(255,255,255,.65) 33.3%,transparent calc(33.3% + 1px)),linear-gradient(to bottom,transparent calc(33.3% - 1px),rgba(255,255,255,.65) 33.3%,transparent calc(33.3% + 1px)),linear-gradient(to right,transparent calc(66.6% - 1px),rgba(255,255,255,.65) 66.6%,transparent calc(66.6% + 1px)),linear-gradient(to bottom,transparent calc(66.6% - 1px),rgba(255,255,255,.65) 66.6%,transparent calc(66.6% + 1px));pointer-events:none}
 #prevBox .tag{position:absolute;left:8px;bottom:8px;background:rgba(38,34,29,.72);color:#fff;font-size:11.5px;border-radius:6px;padding:3px 8px;pointer-events:none}
-/* ---------- 舞台 ---------- */
-.stage{padding:14px}
-.toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
-.toolbar .grow{flex:1}
-.zoomctl{display:flex;align-items:center;gap:2px;background:#f1eadd;border-radius:11px;padding:3px}
-.zoomctl button{border:0;background:transparent;width:32px;height:32px;font-size:16px;border-radius:8px;cursor:pointer;color:#6d6353}
-.zoomctl button:hover{background:#fff;color:var(--ink)}
-.zoomctl input[type=range]{width:84px}
+/* ---------- 舞台（深色工作台，视觉焦点） ---------- */
+.stage{background:radial-gradient(rgba(0,0,0,.28) 1.2px,transparent 1.3px) 0 0/18px 18px,var(--stage);border-radius:26px;padding:20px;color:#efe9da;box-shadow:0 30px 70px rgba(35,26,12,.38),inset 0 1px 0 rgba(255,255,255,.07);min-width:0}
+.stageHead{display:flex;align-items:flex-end;gap:14px;flex-wrap:wrap;margin-bottom:14px}
+.stageHead .tt{min-width:200px;flex:1}
+.stageHead label{font-size:11.5px;letter-spacing:.16em;color:#a99e86;display:block;margin-bottom:5px}
+.stageHead input[type=text]{background:transparent;border:0;border-bottom:1.5px solid #57503f;border-radius:0;color:#fff;font-family:"Songti SC","STSong",serif;font-size:21px;padding:2px 2px 6px;letter-spacing:.03em}
+.stageHead input[type=text]::placeholder{color:#7d7460}
+.stageHead input[type=text]:focus{outline:none;border-bottom-color:var(--accent)}
+.dchips{display:flex;gap:8px;flex-wrap:wrap}
+.dchip{background:var(--stage2);border:1px solid #4c4638;border-radius:12px;padding:7px 12px;text-align:center;min-width:70px}
+.dchip small{display:block;font-size:11px;color:#a99e86;letter-spacing:.08em}
+.dchip b{font-size:16.5px;font-variant-numeric:tabular-nums;color:#fff;white-space:nowrap}
+.dchip b em{font-style:normal;font-size:11.5px;color:#a99e86;margin-left:2px}
+.stage .toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+.stage .seg{background:#211e19}
+.stage .seg button{color:#a99e86}
+.stage .seg button.on{background:#efe9da;color:var(--ink);box-shadow:none}
+.stage .grow{flex:1}
+.zoomctl{display:flex;align-items:center;gap:2px;background:#211e19;border-radius:11px;padding:3px}
+.zoomctl button{border:0;background:transparent;width:32px;height:32px;font-size:16px;border-radius:8px;cursor:pointer;color:#a99e86}
+.zoomctl button:hover{background:#35312a;color:#fff}
+.zoomctl input[type=range]{width:84px;accent-color:var(--accent)}
+.boardFrame{background:#fdfcf9;border-radius:16px;padding:10px;box-shadow:0 18px 44px rgba(0,0,0,.42)}
 .boardWrap{position:relative}
 canvas#board{width:100%;height:auto;display:block;border-radius:8px;background:#fff;cursor:crosshair;touch-action:none}
-#emptyState{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;padding:20px}
-#emptyState .big{font-family:"Songti SC","STSong",serif;font-size:19px;letter-spacing:.04em}
-#emptyState .small{color:var(--muted);font-size:13px;line-height:1.7;max-width:340px}
+#emptyState{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;padding:20px;color:var(--ink)}
+#emptyState .big{font-family:"Songti SC","STSong",serif;font-size:20px;letter-spacing:.05em}
+#emptyState .small{color:var(--muted);font-size:13px;line-height:1.7;max-width:350px}
 #emptyState .row{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
 #emptyState .btn{width:auto;padding:10px 22px}
-.statusbar{display:flex;gap:8px 14px;flex-wrap:wrap;font-size:12.5px;color:#6d6353;border-top:1px solid var(--line);margin-top:12px;padding-top:10px;font-variant-numeric:tabular-nums}
-.statusbar b{color:var(--ink)}
-#tooltip{position:fixed;pointer-events:none;background:var(--ink);color:#fff;font-size:12px;border-radius:8px;padding:6px 9px;display:none;z-index:60;line-height:1.5;box-shadow:0 4px 14px rgba(0,0,0,.25)}
-.progress{height:9px;background:#f1eadd;border-radius:99px;overflow:hidden;margin:8px 0 4px}
+.stage .statusbar{display:flex;gap:8px 14px;flex-wrap:wrap;font-size:12.5px;color:#a99e86;border-top:1px solid #4c4638;margin-top:14px;padding-top:11px;font-variant-numeric:tabular-nums}
+.stage .statusbar b{color:#fff}
+#paintbar{display:none;margin-bottom:12px;background:#35312a;border:1px solid #4c4638;border-radius:14px;padding:12px}
+#paintbar.open{display:block}
+#paintbar .tip,#makebar .tip{font-size:13px;color:#c9bfa5}
+#palChoices{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px;max-height:118px;overflow:auto;padding:2px}
+.pchip{display:flex;align-items:center;gap:6px;border:1px solid #57503f;background:#2c2822;color:#efe9da;border-radius:999px;padding:4px 10px 4px 5px;font-size:12.5px;cursor:pointer;min-height:30px}
+.pchip.on{border-color:var(--accent);background:#4a2c28}
+.pchip i{width:16px;height:16px;border-radius:50%;border:1px solid rgba(255,255,255,.25);flex:none}
+#paintbar .btn.ghost,#makebar .btn.ghost{background:transparent;color:#efe9da;border-color:#57503f}
+#makebar{background:#35312a;border:1px solid #4c4638;border-radius:14px;padding:12px;margin-bottom:12px}
+.progress{height:9px;background:#211e19;border-radius:99px;overflow:hidden;margin:9px 0 5px}
 .progress i{display:block;height:100%;background:var(--accent);width:0;transition:width .2s}
-#paintbar{display:none;margin-bottom:12px}#paintbar.open{display:block}
-#palChoices{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;max-height:118px;overflow:auto;padding:2px}
-.pchip{display:flex;align-items:center;gap:6px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:4px 10px 4px 5px;font-size:12.5px;cursor:pointer;min-height:30px}
-.pchip.on{border-color:var(--accent);background:var(--accent-soft)}
-.pchip i{width:16px;height:16px;border-radius:50%;border:1px solid rgba(0,0,0,.15);flex:none}
-/* ---------- 右栏 ---------- */
+#progText{font-size:12.5px;color:#c9bfa5}
+#tooltip{position:fixed;pointer-events:none;background:var(--ink);color:#fff;font-size:12px;border-radius:8px;padding:6px 9px;display:none;z-index:60;line-height:1.5;box-shadow:0 4px 14px rgba(0,0,0,.25)}
+/* ---------- 右侧：单卡 + 标签页 ---------- */
+.colRcard{background:var(--panel);border:1px solid var(--line);border-radius:22px;box-shadow:0 14px 34px rgba(90,70,30,.09);overflow:hidden}
+.rtabs{display:flex;background:#f4eee0;border-bottom:1px solid var(--line)}
+.rtabs button{flex:1;border:0;background:transparent;padding:13px 4px;font-size:14px;cursor:pointer;color:#6d6353;border-bottom:2.5px solid transparent;font-family:"Songti SC","STSong",serif;letter-spacing:.06em}
+.rtabs button.on{background:var(--panel);color:var(--ink);font-weight:700;border-bottom-color:var(--accent)}
+.rpanel{padding:17px}
+.rpanel .hint{font-size:12.5px;color:var(--muted);line-height:1.6;margin:0 0 12px}
 .stats{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .stat{background:#fbf7ee;border:1px solid var(--line);border-radius:12px;padding:10px 12px;min-width:0}
 .stat small{color:var(--muted);font-size:12px}
 .stat b{display:block;font-size:18px;margin-top:2px;font-variant-numeric:tabular-nums;white-space:nowrap}
 .stat b.small{font-size:15px;padding-top:3px}
-#matList{max-height:430px;overflow:auto;margin:0 -6px;padding:0 6px}
-@media(max-width:1100px){#matList{max-height:300px}}
+#matList{max-height:460px;overflow:auto;margin:0 -6px;padding:0 6px}
 .mat{display:flex;align-items:center;gap:9px;padding:7px 8px;border-radius:10px;cursor:pointer;border:1px solid transparent}
 .mat:hover{background:#fbf7ee}.mat.sel{border-color:var(--accent);background:var(--accent-soft)}
 .mat i{width:24px;height:24px;border-radius:50%;border:1px solid rgba(0,0,0,.14);flex:none}
@@ -121,25 +147,28 @@ canvas#board{width:100%;height:auto;display:block;border-radius:8px;background:#
 .mat .n{margin-left:auto;font-variant-numeric:tabular-nums;font-size:13.5px;white-space:nowrap}
 .mat .bag{color:var(--muted);font-size:12px;width:46px;text-align:right;flex:none}
 .empty{color:var(--muted);font-size:13px;line-height:1.7;padding:8px 0}
-footer{position:relative;z-index:1;max-width:1280px;margin:0 auto 40px;padding:0 22px;color:var(--muted);font-size:12.5px;line-height:1.8}
+footer{max-width:1320px;margin:0 auto 40px;padding:0 22px;color:var(--muted);font-size:12.5px;line-height:1.8;position:relative}
 #toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;font-size:13.5px;border-radius:999px;padding:10px 20px;opacity:0;pointer-events:none;transition:.25s;z-index:80;box-shadow:0 8px 24px rgba(0,0,0,.25);max-width:88vw;text-align:center}
 #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 .hidden{display:none!important}
 </style>
 </head>
 <body>
-<header class="top">
-  <div class="logo" aria-hidden="true"><i style="background:#cf3527"></i><i style="background:#e8a13a"></i><i style="background:#3d7a4c"></i><i style="background:#31567d"></i><i style="background:#26221d"></i><i style="background:#e6ddcb"></i><i style="background:#8a4b6e"></i><i style="background:#5b8c7a"></i><i style="background:#d97b54"></i></div>
+<header class="topbar"><div class="topbar-in">
+  <div class="logo" aria-hidden="true"><i style="background:#e0574a"></i><i style="background:#e8a13a"></i><i style="background:#5da46c"></i><i style="background:#5b84ad"></i><i style="background:#f3ecdd"></i><i style="background:#8a8175"></i><i style="background:#b06a8f"></i><i style="background:#5b8c7a"></i><i style="background:#d97b54"></i></div>
   <div class="brand"><h1>拼豆图纸工坊</h1><p>照片转 MARD 拼豆图纸 · 真实色号 · 照着瓶身就能拼</p></div>
   <div class="spacer"></div>
   <span class="badge">全程<b>本地处理</b>，照片不上传</span>
   <a class="gh" href="https://github.com/qianxunbainian/pindou-blueprint-generator" target="_blank" rel="noopener">GitHub 开源</a>
-</header>
-<div class="steps"><span><b>1</b>上传与裁剪</span><span><b>2</b>调图与生成</span><span><b>3</b>修掉杂色</span><span><b>4</b>边拼边勾 / 导出打印</span></div>
+</div></header>
+<div class="subbar">
+  <div class="steps"><span class="on"><b>1</b>上传与裁剪</span><i class="sep"></i><span><b>2</b>调图与生成</span><i class="sep"></i><span><b>3</b>修掉杂色</span><i class="sep"></i><span><b>4</b>边拼边勾 / 导出</span></div>
+  <span class="note">MARD 221 / 185 色卡 · Lab 感知配色 · 29 格板线</span>
+</div>
 <main>
-  <div class="colL">
-    <section class="panel" id="panelImg">
-      <h2>一、图片</h2>
+  <div class="colL"><div class="inspector">
+    <section class="sec" id="panelImg">
+      <h2><em>1</em>图片</h2>
       <p class="hint">主体清楚、背景简单的照片效果最好。PNG 的透明区域会留空，不放豆。</p>
       <div id="drop" tabindex="0" role="button" aria-label="上传图片">
         <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#cf3527" stroke-width="1.6"><path d="M12 16V4m0 0l-4 4m4-4l4 4"/><path d="M4 16v3a1 1 0 001 1h14a1 1 0 001-1v-3"/></svg>
@@ -156,8 +185,8 @@ footer{position:relative;z-index:1;max-width:1280px;margin:0 auto 40px;padding:0
         <div class="ctl"><div class="lab"><span>上下移动</span><output id="oyO">0</output></div><input type="range" id="oy" min="-50" max="50" value="0" aria-label="上下移动"></div>
       </div>
     </section>
-    <section class="panel" id="panelSpec">
-      <h2>二、图纸规格</h2>
+    <section class="sec" id="panelSpec">
+      <h2><em>2</em>图纸规格</h2>
       <p class="hint">标准方形拼豆板是 29×29。宽度选 29 / 58 / 87 正好是一块、两块、三块板，不用裁板。</p>
       <div class="ctl"><div class="lab"><span>拼豆套装（色卡）</span></div>
         <div class="seg" id="kitSeg"><button data-kit="221" class="on">MARD 221 色</button><button data-kit="185">MARD 185 色</button></div>
@@ -171,8 +200,8 @@ footer{position:relative;z-index:1;max-width:1280px;margin:0 auto 40px;padding:0
         <textarea id="owned" placeholder="把你手头有的色号填进来，用空格或逗号隔开，如：H2 H7 F3 A4 B8，生成时只用这些颜色"></textarea>
       </div>
     </section>
-    <section class="panel" id="panelAdj">
-      <h2>三、图像调整</h2>
+    <section class="sec" id="panelAdj">
+      <h2><em>3</em>图像调整</h2>
       <div class="ctl"><div class="lab"><span>亮度</span><output id="brO">0</output></div><input type="range" id="br" min="-40" max="40" value="0" aria-label="亮度"></div>
       <div class="ctl"><div class="lab"><span>对比度</span><output id="ctO">0</output></div><input type="range" id="ct" min="-40" max="40" value="0" aria-label="对比度"></div>
       <div class="ctl"><div class="lab"><span>饱和度</span><output id="saO">0</output></div><input type="range" id="sa" min="-40" max="60" value="0" aria-label="饱和度"></div>
@@ -181,8 +210,17 @@ footer{position:relative;z-index:1;max-width:1280px;margin:0 auto 40px;padding:0
       <div style="height:6px"></div>
       <button class="btn" id="genBtn">重新生成图纸</button>
     </section>
-  </div>
-  <section class="panel stage" id="stagePanel">
+  </div></div>
+  <section class="stage" id="stagePanel">
+    <div class="stageHead">
+      <div class="tt"><label for="patTitle">图纸名称</label><input type="text" id="patTitle" placeholder="给这张图纸起个名字"></div>
+      <div class="dchips">
+        <div class="dchip"><small>总豆数</small><b id="chipTotal">—</b></div>
+        <div class="dchip"><small>颜色</small><b id="chipColors">—</b></div>
+        <div class="dchip"><small>拼豆板</small><b id="chipBoards">—</b></div>
+        <div class="dchip"><small>成品尺寸</small><b id="chipSize">—</b></div>
+      </div>
+    </div>
     <div class="toolbar">
       <div class="seg" id="modeSeg"><button data-mode="view" class="on">浏览</button><button data-mode="paint">改色</button><button data-mode="make">拼制</button></div>
       <div class="seg" id="dispSeg"><button data-disp="both" class="on">颜色+色号</button><button data-disp="color">纯颜色</button><button data-disp="code">纯色号</button><button data-disp="sym">符号</button></div>
@@ -190,53 +228,54 @@ footer{position:relative;z-index:1;max-width:1280px;margin:0 auto 40px;padding:0
       <div class="zoomctl"><button id="zOut" aria-label="缩小">−</button><input type="range" id="viewZoom" min="60" max="180" value="100" aria-label="图纸缩放"><button id="zIn" aria-label="放大">＋</button><button id="zFit" style="width:auto;padding:0 8px;font-size:12.5px">适宽</button></div>
     </div>
     <div id="paintbar">
-      <div style="font-size:13px;color:#6d6353">点选一个颜色，再点图纸上的格子改色；拖动可连续改，Ctrl+Z 撤销。选「空」即橡皮擦。</div>
+      <div class="tip">点选一个颜色，再点图纸上的格子改色；拖动可连续改，Ctrl+Z 撤销。选「空」即橡皮擦。</div>
       <div id="palChoices"></div>
       <div class="btnrow" style="margin-top:10px"><button class="btn ghost" id="undoBtn">撤销一步</button><button class="btn ghost" id="clearDoneBtn">清除拼制进度</button></div>
     </div>
     <div id="makebar" class="hidden">
-      <div style="font-size:13px;color:#6d6353">拼制模式：点或拖过已经摆好的豆，把它标记为完成。进度会自动保存在这台设备上。</div>
+      <div class="tip">拼制模式：点或拖过已经摆好的豆，把它标记为完成。进度会自动保存在这台设备上。</div>
       <div class="progress"><i id="progFill"></i></div>
-      <div style="font-size:12.5px;color:#6d6353" id="progText">已完成 0 / 0</div>
-      <div style="height:8px"></div>
+      <div id="progText">已完成 0 / 0</div>
     </div>
-    <div class="boardWrap">
+    <div class="boardFrame"><div class="boardWrap">
       <canvas id="board" width="900" height="620"></canvas>
       <div id="emptyState">
         <div class="big">图纸会显示在这里</div>
         <div class="small">上传一张照片生成专属图纸，或者先载入手工示例，看看带坐标、色号和板线的图纸长什么样。</div>
         <div class="row"><button class="btn" id="emptyUpload">上传照片</button><button class="btn ghost" id="emptySample">载入示例草莓</button></div>
       </div>
-    </div>
+    </div></div>
     <div class="statusbar"><span id="stCell">把鼠标放到图纸上查看每一颗</span><span id="stSel"></span><span style="margin-left:auto" id="stBoard"></span></div>
   </section>
-  <aside class="colR">
-    <section class="panel" id="panelData">
-      <h2>图纸数据</h2>
+  <aside class="colR"><div class="colRcard">
+    <div class="rtabs" role="tablist">
+      <button data-rp="panelMats" class="on" role="tab">用豆清单</button>
+      <button data-rp="panelData" role="tab">图纸数据</button>
+      <button data-rp="panelExport" role="tab">导出</button>
+    </div>
+    <section class="rpanel" id="panelMats">
+      <p class="hint">点任意一行，图纸上只亮这个颜色，其余变淡 — 找豆、摆豆都方便。每 1000 颗一包估算袋数。</p>
+      <div id="matList"><p class="empty">还没有图纸。上传一张照片，或者先载入示例草莓。</p></div>
+      <div style="height:10px"></div>
+      <div class="btnrow"><button class="btn ghost" id="copyList">复制购物清单</button><button class="btn ghost" id="dlCsv">导出 CSV</button></div>
+    </section>
+    <section class="rpanel hidden" id="panelData">
       <div class="stats">
         <div class="stat"><small>总豆数</small><b id="stTotal">—</b></div>
         <div class="stat"><small>用到颜色</small><b id="stColors">—</b></div>
         <div class="stat"><small>需要拼豆板</small><b id="stBoards">—</b></div>
         <div class="stat"><small>成品尺寸（5mm）</small><b id="stSize" class="small">—</b></div>
       </div>
-      <div class="ctl" style="margin-top:14px"><div class="lab"><span>图纸标题（印在导出图上）</span></div><input type="text" id="patTitle" placeholder="如：我家猫 · 58×58"></div>
+      <p class="hint" style="margin-top:12px">总豆数决定要买多少豆；颜色数决定要备多少个色号。宽度每多 29 格，就多一列拼豆板。</p>
     </section>
-    <section class="panel" id="panelMats">
-      <h2>用豆清单</h2>
-      <p class="hint">点任意一行，图纸上只亮这个颜色，其余变淡 — 找豆、摆豆都方便。每 1000 颗一包估算袋数。</p>
-      <div id="matList"><p class="empty">还没有图纸。上传一张照片，或者先载入示例草莓。</p></div>
-      <div style="height:10px"></div>
-      <div class="btnrow"><button class="btn ghost" id="copyList">复制购物清单</button><button class="btn ghost" id="dlCsv">导出 CSV</button></div>
-    </section>
-    <section class="panel" id="panelExport">
-      <h2>导出</h2>
+    <section class="rpanel hidden" id="panelExport">
       <p class="hint">导出的 PNG 带行列坐标、29 格板线和完整图例，可直接打印。熨烫面朝下时请勾选镜像。</p>
       <label class="switch"><input type="checkbox" id="mirror"> 镜像导出（左右翻转）</label>
       <button class="btn dark" id="dlPng">下载图纸 PNG</button>
       <div style="height:8px"></div>
       <button class="btn ghost" id="printBtn">打印图纸</button>
     </section>
-  </aside>
+  </div></aside>
 </main>
 <footer>
   色卡：MARD 221 色，RGB 取自公开色卡数据（bitbead.app 开放数据集，CC BY 4.0），与多份公开色卡交叉核对一致；屏幕颜色是近似值，实物以瓶身为准。185 色套装 = 221 色去掉 D26、F25、H5–H23 与 M 系列共 36 色。<br>
@@ -245,6 +284,7 @@ footer{position:relative;z-index:1;max-width:1280px;margin:0 auto 40px;padding:0
 <div id="tooltip"></div>
 <div id="toast" role="status"></div>
 <script>
+
 "use strict";
 const PALETTE = [{"code":"A1","hex":"#FAF4C8"},{"code":"A2","hex":"#FFFFD5"},{"code":"A3","hex":"#FEFF8B"},{"code":"A4","hex":"#FBED56"},{"code":"A5","hex":"#F4D738"},{"code":"A6","hex":"#FEAC4C"},{"code":"A7","hex":"#FE8B4C"},{"code":"A8","hex":"#FFDA45"},{"code":"A9","hex":"#FF995B"},{"code":"A10","hex":"#F77C31"},{"code":"A11","hex":"#FFDD99"},{"code":"A12","hex":"#FE9F72"},{"code":"A13","hex":"#FFC365"},{"code":"A14","hex":"#FD543D"},{"code":"A15","hex":"#FFF365"},{"code":"A16","hex":"#FFFF9F"},{"code":"A17","hex":"#FFE36E"},{"code":"A18","hex":"#FEBE7D"},{"code":"A19","hex":"#FD7C72"},{"code":"A20","hex":"#FFD568"},{"code":"A21","hex":"#FFE395"},{"code":"A22","hex":"#F4F57D"},{"code":"A23","hex":"#E6C9B7"},{"code":"A24","hex":"#F7F8A2"},{"code":"A25","hex":"#FFD67D"},{"code":"A26","hex":"#FFC830"},{"code":"B1","hex":"#E6EE31"},{"code":"B2","hex":"#63F347"},{"code":"B3","hex":"#9EF780"},{"code":"B4","hex":"#5DE035"},{"code":"B5","hex":"#35E352"},{"code":"B6","hex":"#65E2A6"},{"code":"B7","hex":"#3DAF80"},{"code":"B8","hex":"#1C9C4F"},{"code":"B9","hex":"#27523A"},{"code":"B10","hex":"#95D3C2"},{"code":"B11","hex":"#5D722A"},{"code":"B12","hex":"#166F41"},{"code":"B13","hex":"#CAEB7B"},{"code":"B14","hex":"#ADE946"},{"code":"B15","hex":"#2E5132"},{"code":"B16","hex":"#C5ED9C"},{"code":"B17","hex":"#9BB13A"},{"code":"B18","hex":"#E6EE49"},{"code":"B19","hex":"#24B88C"},{"code":"B20","hex":"#C2F0CC"},{"code":"B21","hex":"#156A6B"},{"code":"B22","hex":"#0B3C43"},{"code":"B23","hex":"#303A21"},{"code":"B24","hex":"#EEFCA5"},{"code":"B25","hex":"#4E846D"},{"code":"B26","hex":"#8D7A35"},{"code":"B27","hex":"#CCE1AF"},{"code":"B28","hex":"#9EE5B9"},{"code":"B29","hex":"#C5E254"},{"code":"B30","hex":"#E2FCB1"},{"code":"B31","hex":"#B0E792"},{"code":"B32","hex":"#9CAB5A"},{"code":"C1","hex":"#E8FFE7"},{"code":"C2","hex":"#A9F9FC"},{"code":"C3","hex":"#A0E2FB"},{"code":"C4","hex":"#41CCFF"},{"code":"C5","hex":"#01ACEB"},{"code":"C6","hex":"#50AAF0"},{"code":"C7","hex":"#3677D2"},{"code":"C8","hex":"#0F54C0"},{"code":"C9","hex":"#324BCA"},{"code":"C10","hex":"#3EBCE2"},{"code":"C11","hex":"#28DDDE"},{"code":"C12","hex":"#1C334D"},{"code":"C13","hex":"#CDE8FF"},{"code":"C14","hex":"#D5FDFF"},{"code":"C15","hex":"#22C4C6"},{"code":"C16","hex":"#1557A8"},{"code":"C17","hex":"#04D1F6"},{"code":"C18","hex":"#1D3344"},{"code":"C19","hex":"#1887A2"},{"code":"C20","hex":"#176DAF"},{"code":"C21","hex":"#BEDDFF"},{"code":"C22","hex":"#67B4BE"},{"code":"C23","hex":"#C8E2FF"},{"code":"C24","hex":"#7CC4FF"},{"code":"C25","hex":"#A9E5E5"},{"code":"C26","hex":"#3CAED8"},{"code":"C27","hex":"#D3DFFA"},{"code":"C28","hex":"#BBCFED"},{"code":"C29","hex":"#34488E"},{"code":"D1","hex":"#AEB4F2"},{"code":"D2","hex":"#858EDD"},{"code":"D3","hex":"#2F54AF"},{"code":"D4","hex":"#182A84"},{"code":"D5","hex":"#B843C5"},{"code":"D6","hex":"#AC7BDE"},{"code":"D7","hex":"#8854B3"},{"code":"D8","hex":"#E2D3FF"},{"code":"D9","hex":"#D5B9F8"},{"code":"D10","hex":"#361851"},{"code":"D11","hex":"#B9BAE1"},{"code":"D12","hex":"#DE9AD4"},{"code":"D13","hex":"#B90095"},{"code":"D14","hex":"#8B279B"},{"code":"D15","hex":"#2F1F90"},{"code":"D16","hex":"#E3E1EE"},{"code":"D17","hex":"#C4D4F6"},{"code":"D18","hex":"#A45EC7"},{"code":"D19","hex":"#D8C3D7"},{"code":"D20","hex":"#9C32B2"},{"code":"D21","hex":"#9A009B"},{"code":"D22","hex":"#333A95"},{"code":"D23","hex":"#EBDAFC"},{"code":"D24","hex":"#7786E5"},{"code":"D25","hex":"#494FC7"},{"code":"D26","hex":"#DFC2F8"},{"code":"E1","hex":"#FDD3CC"},{"code":"E2","hex":"#FEC0DF"},{"code":"E3","hex":"#FFB7E7"},{"code":"E4","hex":"#E8649E"},{"code":"E5","hex":"#F551A2"},{"code":"E6","hex":"#F13D74"},{"code":"E7","hex":"#C63478"},{"code":"E8","hex":"#FFDBE9"},{"code":"E9","hex":"#E970CC"},{"code":"E10","hex":"#D33793"},{"code":"E11","hex":"#FCDDD2"},{"code":"E12","hex":"#F78FC3"},{"code":"E13","hex":"#B5006D"},{"code":"E14","hex":"#FFD1BA"},{"code":"E15","hex":"#F8C7C9"},{"code":"E16","hex":"#FFF3EB"},{"code":"E17","hex":"#FFE2EA"},{"code":"E18","hex":"#FFC7DB"},{"code":"E19","hex":"#FEBAD5"},{"code":"E20","hex":"#D8C7D1"},{"code":"E21","hex":"#BD9DA1"},{"code":"E22","hex":"#B785A1"},{"code":"E23","hex":"#937A8D"},{"code":"E24","hex":"#E1BCE8"},{"code":"F1","hex":"#FD957B"},{"code":"F2","hex":"#FC3D46"},{"code":"F3","hex":"#F74941"},{"code":"F4","hex":"#FC283C"},{"code":"F5","hex":"#E7002F"},{"code":"F6","hex":"#943630"},{"code":"F7","hex":"#971937"},{"code":"F8","hex":"#BC0028"},{"code":"F9","hex":"#E2677A"},{"code":"F10","hex":"#8A4526"},{"code":"F11","hex":"#5A2121"},{"code":"F12","hex":"#FD4E6A"},{"code":"F13","hex":"#F35744"},{"code":"F14","hex":"#FFA9AD"},{"code":"F15","hex":"#D30022"},{"code":"F16","hex":"#FEC2A6"},{"code":"F17","hex":"#E69C79"},{"code":"F18","hex":"#D37C46"},{"code":"F19","hex":"#C1444A"},{"code":"F20","hex":"#CD9391"},{"code":"F21","hex":"#F7B4C6"},{"code":"F22","hex":"#FDC0D0"},{"code":"F23","hex":"#F67E66"},{"code":"F24","hex":"#E698AA"},{"code":"F25","hex":"#E54B4F"},{"code":"G1","hex":"#FFE2CE"},{"code":"G2","hex":"#FFC4AA"},{"code":"G3","hex":"#F4C3A5"},{"code":"G4","hex":"#E1B383"},{"code":"G5","hex":"#EDB045"},{"code":"G6","hex":"#E99C17"},{"code":"G7","hex":"#9D5B3E"},{"code":"G8","hex":"#753832"},{"code":"G9","hex":"#E6B483"},{"code":"G10","hex":"#D98C39"},{"code":"G11","hex":"#E0C593"},{"code":"G12","hex":"#FFC890"},{"code":"G13","hex":"#B7714A"},{"code":"G14","hex":"#8D614C"},{"code":"G15","hex":"#FCF9E0"},{"code":"G16","hex":"#F2D9BA"},{"code":"G17","hex":"#78524B"},{"code":"G18","hex":"#FFE4CC"},{"code":"G19","hex":"#E07935"},{"code":"G20","hex":"#A94023"},{"code":"G21","hex":"#B88558"},{"code":"H1","hex":"#FDFBFF"},{"code":"H2","hex":"#FEFFFF"},{"code":"H3","hex":"#B6B1BA"},{"code":"H4","hex":"#89858C"},{"code":"H5","hex":"#48464E"},{"code":"H6","hex":"#2F2B2F"},{"code":"H7","hex":"#000000"},{"code":"H8","hex":"#E7D6DB"},{"code":"H9","hex":"#EDEDED"},{"code":"H10","hex":"#EEE9EA"},{"code":"H11","hex":"#CECDD5"},{"code":"H12","hex":"#FFF5ED"},{"code":"H13","hex":"#F5ECD2"},{"code":"H14","hex":"#CFD7D3"},{"code":"H15","hex":"#98A6A8"},{"code":"H16","hex":"#1D1414"},{"code":"H17","hex":"#F1EDED"},{"code":"H18","hex":"#FFFDF0"},{"code":"H19","hex":"#F6EFE2"},{"code":"H20","hex":"#949FA3"},{"code":"H21","hex":"#FFFBE1"},{"code":"H22","hex":"#CACAD4"},{"code":"H23","hex":"#9A9D94"},{"code":"M1","hex":"#BCC6B8"},{"code":"M2","hex":"#8AA386"},{"code":"M3","hex":"#697D80"},{"code":"M4","hex":"#E3D2BC"},{"code":"M5","hex":"#D0CCAA"},{"code":"M6","hex":"#B0A782"},{"code":"M7","hex":"#B4A497"},{"code":"M8","hex":"#B38281"},{"code":"M9","hex":"#A58767"},{"code":"M10","hex":"#C5B2BC"},{"code":"M11","hex":"#9F7594"},{"code":"M12","hex":"#644749"},{"code":"M13","hex":"#D19066"},{"code":"M14","hex":"#C77362"},{"code":"M15","hex":"#757D78"}];
 const byCode = {}; PALETTE.forEach(p=>byCode[p.code]=p);
@@ -369,10 +409,13 @@ function symbolMap(){const m={};if(!pat)return m;[...new Set(pat.cells.filter(Bo
 function counts(){const m=new Map();if(pat)pat.cells.forEach(c=>{if(c)m.set(c.code,(m.get(c.code)||0)+1)});return m}
 function renderStats(){
   if(!pat)return;const m=counts();let total=0;m.forEach(n=>total+=n);
+  const boards=Math.ceil(pat.w/29)*Math.ceil(pat.h/29), size=(pat.w*.5).toFixed(1)+'×'+(pat.h*.5).toFixed(1)+' cm';
   $('stTotal').textContent=total.toLocaleString()+' 颗';
   $('stColors').textContent=m.size+' 色';
-  $('stBoards').textContent=(Math.ceil(pat.w/29)*Math.ceil(pat.h/29))+' 块';
-  $('stSize').textContent=(pat.w*.5).toFixed(1)+'×'+(pat.h*.5).toFixed(1)+' cm';
+  $('stBoards').textContent=boards+' 块';
+  $('stSize').textContent=size;
+  const set=(id,v)=>{const e=$(id);if(e)e.textContent=v};
+  set('chipTotal',total.toLocaleString());set('chipColors',m.size);set('chipBoards',boards);set('chipSize',size);
 }
 function renderMats(){
   if(!pat)return;const m=counts();
@@ -389,8 +432,10 @@ function renderProgress(){
   $('progFill').style.width=(total?d/total*100:0)+'%';
   $('progText').textContent=`已完成 ${d} / ${total}（${total?(d/total*100).toFixed(1):0}%）`;
 }
+
 </script>
 <script>
+
 "use strict";
 // ---------- 图纸交互 ----------
 function cellAt(ev){
@@ -565,6 +610,14 @@ $('dlPng').onclick=()=>{
 };
 $('printBtn').onclick=()=>{if(!pat){toast('先生成一张图纸');return}$('dlPng').click();toast('已下载图纸 PNG，用图片查看器打开后打印（建议 A3 或 100% 比例）')};
 syncGw();
+
+</script>
+<script>
+"use strict";
+document.querySelectorAll('.rtabs button').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.rtabs button').forEach(x=>x.classList.toggle('on',x===b));
+  ['panelMats','panelData','panelExport'].forEach(id=>document.getElementById(id).classList.toggle('hidden',id!==b.dataset.rp));
+}));
 </script>
 </body>
 </html>
